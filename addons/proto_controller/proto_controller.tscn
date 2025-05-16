@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=8 format=3 uid="uid://8lkudm2r53cn"]
 
-[ext_resource type="Script" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="Script" uid="uid://c76bbafckuadk" path="res://addons/proto_controller/proto_controller.gd" id="1_ucva2"]
+[ext_resource type="PackedScene" uid="uid://cb0x1qwj5b6c4" path="res://models/zombie/zombie.glb" id="2_wr06p"]
+[ext_resource type="AnimationLibrary" uid="uid://ibof7s1ghe1y" path="res://models/zombie/zombie_idle.glb" id="3_5hfox"]
+[ext_resource type="AnimationLibrary" uid="uid://vhtgt5lg3p6v" path="res://models/zombie/zombie_run.glb" id="4_6dqce"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -16,8 +19,19 @@ height = 1.8
 [node name="ProtoController" type="CharacterBody3D"]
 script = ExtResource("1_ucva2")
 
+[node name="zombie" parent="." instance=ExtResource("2_wr06p")]
+transform = Transform3D(-0.70265, -0.000291746, 0.000180484, -0.000291742, 0.70265, 3.03236e-05, -0.000126827, 2.12625e-05, -1, 0.000389701, -0.0385686, -2.84015e-05)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="zombie"]
+libraries = {
+&"zombie_idle": ExtResource("3_5hfox"),
+&"zombie_run": ExtResource("4_6dqce")
+}
+autoplay = "zombie_idle/Idle"
+
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_iof21")
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_ucva2")
@@ -30,3 +44,4 @@ shape = SubResource("CapsuleShape3D_iof21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.962213, 0.272297, 0, -0.272297, 0.962213, 0, 0.626292, 2.64735)

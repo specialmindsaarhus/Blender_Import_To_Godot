@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://13wiq4h01sph"]
+[gd_scene load_steps=5 format=3 uid="uid://13wiq4h01sph"]
 
-[ext_resource type="Script" path="res://addons/proto_controller/proto_controller.gd" id="2_dk3hx"]
+[ext_resource type="PackedScene" uid="uid://8lkudm2r53cn" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gumxn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -14,17 +14,6 @@ background_mode = 2
 sky = SubResource("Sky_g8op5")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
-albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ucva2"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iof21"]
-radius = 0.4
-height = 1.8
 
 [node name="Main" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
@@ -44,21 +33,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.55, -0.5, 39.1631)
 use_collision = true
 size = Vector3(19.6, 1, 197.115)
 
-[node name="ProtoController" type="CharacterBody3D" parent="."]
-transform = Transform3D(-0.999799, 0, 0.0200873, 0, 1, 0, -0.0200873, 0, -0.999799, 7.72323, 0, 0.102148)
-script = ExtResource("2_dk3hx")
+[node name="Node3D" type="Node3D" parent="."]
 
-[node name="Mesh" type="MeshInstance3D" parent="ProtoController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-material_override = SubResource("StandardMaterial3D_iof21")
-cast_shadow = 0
-mesh = SubResource("CapsuleMesh_ucva2")
-
-[node name="Collider" type="CollisionShape3D" parent="ProtoController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_iof21")
-
-[node name="View" type="Node3D" parent="ProtoController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
-
-[node name="Camera3D" type="Camera3D" parent="ProtoController/View"]
+[node name="ProtoController" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.02095, -1.90735e-06, -6.57218)

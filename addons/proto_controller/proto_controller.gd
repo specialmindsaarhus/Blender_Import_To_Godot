@@ -5,6 +5,16 @@
 
 extends CharacterBody3D
 
+#
+#
+#
+#By Mark controlling animations
+@onready var anim_player = $zombie/AnimationPlayer
+#
+#
+#
+#
+
 ## Can we move around?
 @export var can_move : bool = true
 ## Are we affected by gravity?
@@ -108,9 +118,25 @@ func _physics_process(delta: float) -> void:
 		if move_dir:
 			velocity.x = move_dir.x * move_speed
 			velocity.z = move_dir.z * move_speed
+			#
+			#
+			# Tilføjet af Mark til styrring af animation
+			if !anim_player.is_playing() or anim_player.current_animation != "zombie_run/Run":
+				anim_player.play("zombie_run/Run")
+			#
+			#
+			#
 		else:
 			velocity.x = move_toward(velocity.x, 0, move_speed)
 			velocity.z = move_toward(velocity.z, 0, move_speed)
+			#
+			#
+			# Tilføjet af Mark til styrring af animation
+			if !anim_player.is_playing() or anim_player.current_animation != "zombie_idle/Idle":
+				anim_player.play("zombie_idle/Idle")
+			#
+			#
+			#
 	else:
 		velocity.x = 0
 		velocity.y = 0
